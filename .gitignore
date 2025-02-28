@@ -1,0 +1,23 @@
+# Geral
+*.log
+*.cache
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Node.js (vite-frontend e vite-backend)
+vite-backend/node_modules/
+vite-frontend/node_modules/
+dist/
+.env
+
+# Android
+.idea/
+*.iml
+.gradle/
+build/
+local.properties
+
+# Outros
+.vscode/
