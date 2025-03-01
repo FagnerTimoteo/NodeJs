@@ -4,7 +4,7 @@ const alunoController = {
     create: async (req, res) => {
         try {
             const aluno = {
-                name: req.body.nome,
+                nome: req.body.nome,
                 endereco: req.body.endereco,
                 dataNascimento: req.body.dataNascimento,
                 matricula: req.body.matricula,
