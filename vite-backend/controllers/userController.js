@@ -20,7 +20,7 @@ const userController = {
             const { id } = req.params;
             const user = await User.findById(id);
             if (!user) {
-                return res.status(404).json({ message: "Usuário não encontrado" });
+                return res.status(404).json({ message: "Disciplina não encontrada" });
             }
             res.json(user);
         } catch (err) {
@@ -37,7 +37,6 @@ const userController = {
         try {
             const id = req.params.id
             const results = await UserModel.deleteOne({_id: id})
-            //res.send(results).status(200)
             res.status(200)
         } catch (error) {
             console.log(error)

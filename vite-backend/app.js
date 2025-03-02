@@ -13,7 +13,7 @@ conn();
 
 //routes
 const routes = require("./routes/router");
-app.use("/api",routes);
+app.use("/api", routes);
 
 //Porta de comunicação
 const port = 3000;

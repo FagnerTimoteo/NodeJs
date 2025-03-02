@@ -1,9 +1,9 @@
 import {  Link } from "react-router-dom";
 import React, { useState, useEffect }  from 'react';
 
-export default function Pagina2()
-{
+export default function Pagina2() {
     const [posts, setPosts] = useState([]);
+
     useEffect(() => {
         fetch('http://127.0.0.1:3000/api/users/all')
          .then((response) => response.json())
@@ -35,8 +35,7 @@ export default function Pagina2()
             });      
     }
 
-   return (
-    <>
+   return (<>
         <div>
         <table border={1}>
             <thead>
@@ -76,6 +75,5 @@ export default function Pagina2()
             </tbody>
         </table>
         </div>
-    </>
-    );
+    </>);
 }

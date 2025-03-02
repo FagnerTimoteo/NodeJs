@@ -20,6 +20,11 @@ const alunoController = {
         }
     },
 
+    readAll: async(req, res) => {
+        let results = await Aluno.find({})
+        res.send(results).status(200)
+    },
+
     read: async (req, res) => {
 
     },
@@ -29,8 +34,15 @@ const alunoController = {
     },
 
     delete: async (req, res) => {
-
-    },
+        try {
+            const id = req.params.id
+            await Aluno.deleteOne({_id: id})
+            res.status(200).json({ message: 'Aluno deletado com sucesso!' })
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: 'Erro ao deletar aluno' })
+        }
+    }
 }
 
 module.exports = alunoController;

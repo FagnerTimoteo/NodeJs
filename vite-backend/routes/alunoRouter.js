@@ -3,7 +3,8 @@ const alunoController = require("../controllers/alunoController");
 
     router.post("/Aluno", async (req, res) => { alunoController.create(req, res) });
   
-    router.get("/", async (req, res) => {
-    });
+    router.route("/Aluno/all").get((req, res) => alunoController.readAll(req, res))
+
+    router.route("/Aluno/delete/:id").post((req, res) => alunoController.delete(req, res))
 
 module.exports = router
