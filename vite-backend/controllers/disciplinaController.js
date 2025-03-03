@@ -20,12 +20,24 @@ const disciplinaController = {
         res.send(results).status(200)
     },
 
-    read: async (req, res) => {
-
-    },
-
     update: async (req, res) => {
+        try {
+            const id = req.params.id
 
+            const nome = req.body.nome
+            const cargaHoraria = req.body.cargaHoraria
+
+            const disciplina = await Disciplina.findByIdAndUpdate(
+                id,
+                { nome: nome },
+                { cargaHoraria: cargaHoraria },
+                { new: true }
+            );
+            
+            res.send(disciplina).status(200)
+        } catch (err) {
+            console.log(err)
+        }
     },
 
     delete: async (req, res) => {
@@ -37,7 +49,7 @@ const disciplinaController = {
             console.log(error)
             res.status(500).json({ message: 'Erro ao deletar disciplina' }) // Responde erro
         }
-    }    
+    }
 }
 
 module.exports = disciplinaController;

@@ -4,8 +4,8 @@ const userController = {
     create: async(req, res) => {
         try {
             const user = {
-                name: req.body.name,
-                idade: req.body.idade,
+                name: name,
+                idade: idade,
             }
 
             const response = await UserModel.create(user)

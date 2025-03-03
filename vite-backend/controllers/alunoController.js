@@ -30,7 +30,33 @@ const alunoController = {
     },
 
     update: async (req, res) => {
+        try {
+            const id = req.params.id
 
+            const nome = req.body.nome
+            const endereco = req.body.endereco
+            const dataNascimento = req.body.dataNascimento
+            const matricula = req.body.matricula
+            const telefone = req.body.telefone
+            const email = req.body.email
+            const curso = req.body.curso
+
+            const aluno = await Aluno.findByIdAndUpdate(
+                id,
+                { nome: nome },
+                { endereco: endereco },
+                { dataNascimento: dataNascimento },
+                { matricula: matricula },
+                { telefone: telefone},
+                { email: email },
+                { curso: curso },
+                { new: true }
+            );
+            
+            res.send(aluno).status(200)
+        } catch (err) {
+            console.log(err)
+        }
     },
 
     delete: async (req, res) => {
