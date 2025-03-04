@@ -1,32 +1,42 @@
 const Aluno = require("../models/Aluno")
+const crypto = require("crypto");
 
 const alunoController = {
     create: async (req, res) => {
+        const nome = req.body.nome
+
         try {
             const aluno = {
-                nome: req.body.nome,
+                nome: nome,
                 endereco: req.body.endereco,
                 dataNascimento: req.body.dataNascimento,
                 matricula: req.body.matricula,
                 telefone: req.body.telefone,
                 email: req.body.email,
-                curso: req.body.curso
-            }
+                curso: req.body.curso,
+                senha: hash(req.body.senha)
+            };
 
-            const response = await Aluno.create(aluno)
-            res.status(201).json({response, msg:"U"})
+            const alunoExiste = await Aluno.findOne({ nome });
+            if (alunoExiste) {z
+                return res.status(404).json({ msg: "Já existe um aluno com esse nome" });
+            }
+    
+            const response = await Aluno.create(aluno);
+    
+            response.senha = undefined;
+    
+            res.status(201).json({ response, msg: "Aluno cadastrado com sucesso!" });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            res.status(500).json({ msg: "Algo deu errado!" });
         }
     },
+    
 
     readAll: async(req, res) => {
         let results = await Aluno.find({})
         res.send(results).status(200)
-    },
-
-    read: async (req, res) => {
-
     },
 
     update: async (req, res) => {
@@ -68,7 +78,32 @@ const alunoController = {
             console.log(error)
             res.status(500).json({ message: 'Erro ao deletar aluno' })
         }
+    },
+
+
+    logar: async (req, res) => {
+        try {
+            const { nome, senha } = req.body;
+        
+            const aluno = await Aluno.findOne({ nome });
+            if (!aluno) {
+                return res.status(404).json({ msg: "Aluno não encontrado!" });
+            }
+        
+            if (hash(senha) === aluno.senha) {
+                return res.status(200).json({ msg: "Login realizado com sucesso!" });
+            } else {
+                return res.status(401).json({ msg: "Senha inválida!" });
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Erro no servidor!" });
+        }
     }
+}
+
+function hash(senha) {
+    return crypto.createHash("sha256").update(senha).digest("hex");
 }
 
 module.exports = alunoController;
