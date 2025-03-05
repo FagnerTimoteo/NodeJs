@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-export default function RelacionamentoAlunoDisciplina() {
+export default function RelacionarAlunoDisciplina() {
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3000/api/Disciplina/all')
+        fetch('http://127.0.0.1:3000/api/Disciplinas/all')
             .then((response) => response.json())
             .then((data) => {
                 setDisciplinas(data);
@@ -15,12 +15,14 @@ export default function RelacionamentoAlunoDisciplina() {
     }, []);
 
     return (<>
-        <label htmlFor="disciplinas">Curso:</label>
+        <label htmlFor="disciplinas">Disciplina: </label>
         <select id="disciplinas" name="listaDisciplinas" form="cadastroAluno">
-            { disciplinas.map((disciplina) => {
-                return (<>
-                    <option value={disciplina.nome}>{disciplina.nome}</option>
-                </>)
+        {disciplinas.map((disciplina, index) => {
+                return (
+                    <option key={index} value={disciplina.nome}>
+                        {disciplina.nome}
+                    </option>
+                );
             })}
         </select>
     </>)

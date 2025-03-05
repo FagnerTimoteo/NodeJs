@@ -8,6 +8,7 @@ export default function CasdastrarAluno() {
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
     const [curso, setCurso] = useState('');
+    const [senha, setSenha] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Isso aqui evita que a página recarregue
@@ -24,7 +25,8 @@ export default function CasdastrarAluno() {
                 matricula,
                 telefone,
                 email,
-                curso
+                curso,
+                senha
             }),
         })
         .then((response) => response.json())
@@ -38,31 +40,47 @@ export default function CasdastrarAluno() {
             setTelefone('');
             setEmail('');
             setCurso('');
+            setSenha('');
         })
         .catch((err) => {
             console.log(err.message);
         });
     };
 
-    return (
-        <>
+    function showPassword(e) {
+        const x = document.getElementById("password");
+        if (e.target.checked) {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }    
+
+    return (<>
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nome" value={nome}
+            <input type="text" placeholder="Nome" value={nome} required
                 onChange={(e) => setNome(e.target.value)} ></input>
-            <input type="text" placeholder="Endereço" value={endereco} 
+            <input type="text" placeholder="Endereço" value={endereco} required
                 onChange={(e) => setEndereco(e.target.value)} ></input>
-            <input type="date" placeholder="Data Nascimento" value={dataNascimento} 
-                onChange={(e) => setDataNascimento(e.target.value)} ></input>
-            <input type="text" placeholder="Matrícula" value={matricula} 
+            <input type="date" placeholder="Data Nascimento" value={dataNascimento}
+                required onChange={(e) => setDataNascimento(e.target.value)} ></input>
+            <input type="text" placeholder="Matrícula" value={matricula} required
                 onChange={(e) => setMatricula(e.target.value)} ></input>
-            <input type="text" placeholder="Telefone" value={telefone}
+            <input type="text" placeholder="Telefone" value={telefone} required
                 onChange={(e) => setTelefone(e.target.value)} ></input>
-            <input type="email" placeholder="Email" value={email} 
+            <input type="email" placeholder="Email" value={email} required
                 onChange={(e) => setEmail(e.target.value)} ></input>
-            <input type="text" placeholder="Curso" value={curso} 
+            <input type="text" placeholder="Curso" value={curso} required
                 onChange={(e) => setCurso(e.target.value)} ></input>
+            <input type="password" placeholder="Senha" value={senha} required
+                id="password" onChange={(e) => setSenha(e.target.value)} ></input>
+
+            <label>
+                <input type="checkbox" onClick={(e) => showPassword(e)} />
+                Mostrar Senha
+            </label>
+    
             <button type="submit">Cadastrar</button>
         </form>
-        </>
-    );
+    </>);
 }

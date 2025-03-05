@@ -81,7 +81,7 @@ const alunoController = {
     },
 
 
-    logar: async (req, res) => {
+    login: async (req, res) => {
         try {
             const { nome, senha } = req.body;
         
@@ -91,7 +91,10 @@ const alunoController = {
             }
         
             if (hash(senha) === aluno.senha) {
-                return res.status(200).json({ msg: "Login realizado com sucesso!" });
+                return res.status(200).json({
+                    msg: "Login realizado com sucesso!",
+                    nome: aluno.nome 
+                });
             } else {
                 return res.status(401).json({ msg: "Senha inválida!" });
             }

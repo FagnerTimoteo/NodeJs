@@ -20,17 +20,13 @@ export default function ListarAlunos() {
         <table border={1}>
             <thead>
                 <tr>
-                    <td>
-                        <Link to="/Inserir" state={{id: null}}  >Inserir</Link>
-                    </td>
-                </tr>
-                <tr>
                     <td>Nome</td>
                     <td>Endereço</td>
                     <td>Data de Nascimento</td>
                     <td>Matrícula</td>
                     <td>Telefone</td>
                     <td>Email</td>
+                    <td>Senha</td>
                     <td>Editar</td>
                     <td>Excluir</td>
                 </tr>
@@ -59,9 +55,14 @@ export default function ListarAlunos() {
                                 {post.email}
                             </td>
                             <td>
+                                {post.senha}
+                            </td>
+                            <td>
+                                Editar
                                 {/*<Link to="/Update" state={{id: post._id}} >Editar</Link>*/}
                             </td>
                             <td>
+                                Excluir
                                 {/*<button onClick={(e)=> handleDelete(post._id)}></button>*/}
                             </td>
                         </tr>
