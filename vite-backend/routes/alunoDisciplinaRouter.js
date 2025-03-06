@@ -3,6 +3,8 @@ const alunoDisciplinaController = require("../controllers/alunoDisciplinaControl
 
 router.route("/AlunoDisciplinas").post((req, res) => alunoDisciplinaController.create(req, res))
 
+router.route("/AlunoDisciplinas/:id").post((req, res) => alunoDisciplinaController.return(req, res))
+
 router.route("/AlunoDisciplinas/all").get((req, res) => alunoDisciplinaController.readAll(req, res))
 
 router.route("/AlunoDisciplinas/update/:id").post((req, res) => alunoDisciplinaController.update(req, res))

@@ -20,8 +20,10 @@ export default function Login() {
         .then((data) => {
             alert(data.msg);
             if (data.msg === "Login realizado com sucesso!") {
-                navigate(`/RelacionarAlunoDisciplina`)
-                //navigate(`/perfil/${data.nome}`); // Redireciona para a página do usuário
+                console.log(data.id)
+
+                // Isto não é seguro
+                navigate(`/RelacionarAlunoDisciplina/${data.id}`)
             }
         })
         .catch((err) => {
@@ -40,17 +42,31 @@ export default function Login() {
     }
 
     return (<>
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Nome" value={nome}
-                    onChange={(e) => setNome(e.target.value)} ></input>
-                <input type="text" placeholder="Senha" value={senha} id="password"
-                    onChange={(e) => setPassword(e.target.value)} ></input>
-                <label>
-                    <input type="checkbox" onClick={(e) => showPassword(e)} />
-                    Mostrar Senha
-                </label>
-                <button type="submit">Logar</button>
+        <div className="container mt-5">
+            <form onSubmit={handleSubmit} className="card p-4 shadow">
+                <h1 className="text-center mb-4">Login</h1>
+                
+                <div className="mb-3">
+                    <label className="form-label">Nome</label>
+                    <input type="text" placeholder="Nome" value={nome}
+                        onChange={(e) => setNome(e.target.value)}
+                        className="form-control" />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Senha</label>
+                    <input type="password" placeholder="Senha" value={senha} id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="form-control" />
+                </div>
+
+                <div className="form-check mb-3">
+                    <input type="checkbox" className="form-check-input" id="showPassword" 
+                        onClick={(e) => showPassword(e)} />
+                    <label className="form-check-label" htmlFor="showPassword">Mostrar Senha</label>
+                </div>
+
+                <button type="submit" className="btn btn-primary w-100">Logar</button>
             </form>
         </div>
     </>)

@@ -6,6 +6,5 @@ import RoutesApp from './routeapp.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RoutesApp></RoutesApp>
-    { /*<CadastrarDisciplina></CadastrarDisciplina>*/ }
   </StrictMode>
 )
