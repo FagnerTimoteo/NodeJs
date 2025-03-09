@@ -6,8 +6,6 @@ const matriculaController = {
   create: async (req, res) => {
     try {      
       const { alunoId, disciplinaId } = req.body;
-      console.log(alunoId)
-      console.log(disciplinaId)
 
       const alunoExiste = await Aluno.findById(alunoId);
       if (!alunoExiste) {
@@ -38,8 +36,8 @@ const matriculaController = {
   },
 
   readAllByAlunoId: async (req, res) => {
-    const alunoId = req.body.alunoId;
-    console.log(alunoId)
+    const alunoId = req.params.id;
+
     const results = await AlunoDisciplina.findOne({ alunoId })
     res.status(200).json(results);
   },

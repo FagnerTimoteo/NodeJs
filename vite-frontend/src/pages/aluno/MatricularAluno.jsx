@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function RelacionarAlunoDisciplina() {
+export default function MatricularAluno() {
     const { id } = useParams(); // Pega o ID da URL
     const [disciplinas, setDisciplinas] = useState([]); 
     const [disciplinaSelecionada, setDisciplinaSelecionada] = useState("");
@@ -9,9 +9,7 @@ export default function RelacionarAlunoDisciplina() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(disciplinaSelecionada)
-
-        await fetch('http://127.0.0.1:3000/api/AlunoDisciplinas', {
+        await fetch('http://127.0.0.1:3000/api/Matriculas', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -25,7 +23,6 @@ export default function RelacionarAlunoDisciplina() {
         .then((data) => {
             alert(data.msg);
             if (data.msg === "Aluno matriculado à disciplina com sucesso!") {
-                console.log(data.id)
 
                 // Isto não é seguro
                 navigate(`/RelacionarAlunoDisciplina/${data.id}`)
