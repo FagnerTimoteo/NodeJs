@@ -11,14 +11,6 @@ const AlunoDisciplinaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Disciplina' // Se quiser popular depois
-    },
-    nota: {
-        type: Number,
-        required: true
-    },
-    semestre: {
-        type: String,
-        required: true
     }
 })
 

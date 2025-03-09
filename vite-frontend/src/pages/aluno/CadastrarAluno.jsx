@@ -77,10 +77,19 @@ export default function CasdastrarAluno() {
                         <input type="text" placeholder="Matrícula" value={matricula} required
                             onChange={(e) => setMatricula(e.target.value)} className="form-control"/>
                     </div>
+
                     <div className="mb-3">
                         <input type="text" placeholder="Telefone" value={telefone} required
-                            onChange={(e) => setTelefone(e.target.value)} className="form-control"/>
+                            maxLength="15" onChange={(e) => setTelefone(e.target.value)} className="form-control"
+                            onInput={(e) => {
+                                let value = e.target.value.replace(/\D/g, ''); // Remove letras e sinais
+                                value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // DDD
+                                value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Hífen depois dos 5 números
+                                e.target.value = value; 
+                                setTelefone(value); 
+                            }}/>
                     </div>
+
                     <div className="mb-3">
                         <input type="email" placeholder="Email" value={email} required
                             onChange={(e) => setEmail(e.target.value)} className="form-control"/>

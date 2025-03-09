@@ -48,16 +48,15 @@ export default function Login() {
                 
                 <div className="mb-3">
                     <label className="form-label">Nome</label>
-                    <input type="text" placeholder="Nome" value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                        className="form-control" />
+                    <input type="text" placeholder="Nome" value={nome} required
+                        onChange={(e) => setNome(e.target.value)} className="form-control" />
                 </div>
 
                 <div className="mb-3">
                     <label className="form-label">Senha</label>
-                    <input type="password" placeholder="Senha" value={senha} id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="form-control" />
+                    <input type="password" placeholder="Senha" value={senha} required
+                        onChange={(e) => setPassword(e.target.value)} className="form-control"
+                        id="password"/>
                 </div>
 
                 <div className="form-check mb-3">

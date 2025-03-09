@@ -3,18 +3,22 @@ import { useParams } from 'react-router-dom';
 
 export default function RelacionarAlunoDisciplina() {
     const { id } = useParams(); // Pega o ID da URL
-    const [disciplinas, setDisciplinas] = useState([]);
-
+    const [disciplinas, setDisciplinas] = useState([]); 
+    const [disciplinaSelecionada, setDisciplinaSelecionada] = useState("");
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch('http://127.0.0.1:3000/api/Aluno', {
+        console.log(disciplinaSelecionada)
+
+        await fetch('http://127.0.0.1:3000/api/AlunoDisciplinas', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
             body: JSON.stringify({
-                nome
+                alunoId: id,
+                disciplinaId: disciplinaSelecionada
             }),
         })
         .then((response) => response.json())
@@ -29,21 +33,25 @@ export default function RelacionarAlunoDisciplina() {
             .catch((err) => console.log(err.message) );
     }, []);
 
-    return (<>
-        <form onSubmit={handleSubmit}>
-            <h1>Bem-vindo, aluno {id}!</h1>
-            <label htmlFor="disciplinas">Disciplina: </label>
-            <select id="disciplinas" name="listaDisciplinas" form="cadastroAluno">
-            {disciplinas.map((disciplina, index) => {
-                    return (
-                        <option key={index} value={disciplina.nome}>
-                            {disciplina.nome}
-                        </option>
-                    );
-                })}
-            </select>
-
-            <button type="submit">Cadastrar</button>
-        </form>
-    </>)
+    return (
+        <div className="container mt-5 d-flex justify-content-center">
+            <form onSubmit={handleSubmit} className="card p-4 shadow col-md-6">
+                <h1 className="text-center mb-4">Bem-vindo, aluno {id}!</h1>
+                <div className="mb-3">
+                    <label htmlFor="disciplinas" className="form-label">Disciplina:</label>
+                    <select id="disciplinas" name="listaDisciplinas" className="form-select" required
+                        value={disciplinaSelecionada}
+                        onChange={(e) => setDisciplinaSelecionada(e.target.value) } >
+                        <option value="" disabled>Selecione uma disciplina</option>
+                        {disciplinas.map((disciplina, index) => (
+                            <option key={index} value={disciplina._id}>
+                                {disciplina.nome}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button type="submit" className="btn btn-primary w-100">Cadastrar</button>
+            </form>
+        </div>
+    );
 }

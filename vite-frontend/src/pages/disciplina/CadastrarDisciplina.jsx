@@ -29,15 +29,31 @@ export default function CadastrarDisciplina() {
         });
     };
 
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nome" value={nome}
-                onChange={(e) => setNome(e.target.value)} ></input>
-            <input type="number" placeholder="Carga Horária" value={cargaHoraria} 
-                onChange={(e) => setCargaHoraria(e.target.value)} ></input>
-            <button type="submit">Cadastrar</button>
-        </form>
-        </>
-    )
+    return (<>
+        <div className="container mt-5 d-flex justify-content-center">
+            <form onSubmit={handleSubmit} className="card p-4 shadow col-md-6">
+                <h1 className="text-center mb-4">Bem-vindo, aluno {id}!</h1>
+
+                <div className="mb-3">
+                    <label htmlFor="disciplinas" className="form-label">Disciplina:</label>
+                    <select 
+                        id="disciplinas" 
+                        name="listaDisciplinas" 
+                        className="form-select" // Classe correta para estilizar o select
+                        required
+                        onChange={(e) => setDisciplina(e.target.value)}
+                    >
+                        <option value="" disabled selected>Selecione uma disciplina</option>
+                        {disciplinas.map((disciplina, index) => (
+                            <option key={index} value={disciplina.nome}>
+                                {disciplina.nome}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <button type="submit" className="btn btn-primary w-100">Cadastrar</button>
+            </form>
+        </div>
+        </>)
 }
