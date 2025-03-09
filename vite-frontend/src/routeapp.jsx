@@ -4,9 +4,9 @@ import Login from "./pages/aluno/Login";
 import CadastrarAluno from "./pages/aluno/CadastrarAluno";
 import CadastrarDisciplina from "./pages/disciplina/CadastrarDisciplina";
 import MatricularAluno from "./pages/aluno/MatricularAluno";
+import ListarDisciplinas from "./pages/disciplina/ListarDisciplinas";
 
 //import ListarAlunos from "./pages/aluno/ListarAlunos";
-//import ListarDisciplina from "./pages/ListarDisciplina";
 //import MatricularAluno from "./pages/MatricularAluno";
 
 export default function RoutesApp(){
@@ -15,6 +15,7 @@ export default function RoutesApp(){
       <Routes>
         <Route path="/Login" exact element={<Login />} />
         <Route path="/CadastrarAluno" exact element={<CadastrarAluno />} />
+        <Route path="/ListarDisciplinas" exact element={<ListarDisciplinas />} />
         <Route path="/CadastrarDisciplina" exact element={<CadastrarDisciplina />} />
         <Route path="/MatricularAluno" exact element={<MatricularAluno />} />
         <Route path="/MatricularAluno/:id" element={<MatricularAluno />} />
@@ -24,6 +25,5 @@ export default function RoutesApp(){
 }
 /*
   <Route  path="/ListarAlunos" exact element={<ListarAlunos />} />
-  <Route  path="/ListarDisciplina" exact element={<ListarDisciplina />} />
   <Route  path="/MatricularAluno" exact element={<MatricularAluno />} />
 */
