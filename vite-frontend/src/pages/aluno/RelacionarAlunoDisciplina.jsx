@@ -22,7 +22,15 @@ export default function RelacionarAlunoDisciplina() {
             }),
         })
         .then((response) => response.json())
-        .then((data) => console.log(data) )
+        .then((data) => {
+            alert(data.msg);
+            if (data.msg === "Aluno matriculado à disciplina com sucesso!") {
+                console.log(data.id)
+
+                // Isto não é seguro
+                navigate(`/RelacionarAlunoDisciplina/${data.id}`)
+            }
+        })
         .catch((err) => console.log(err.message) );
     };
 
@@ -50,7 +58,7 @@ export default function RelacionarAlunoDisciplina() {
                         ))}
                     </select>
                 </div>
-                <button type="submit" className="btn btn-primary w-100">Cadastrar</button>
+                <button type="submit" className="btn btn-primary w-100">Matricular-se</button>
             </form>
         </div>
     );

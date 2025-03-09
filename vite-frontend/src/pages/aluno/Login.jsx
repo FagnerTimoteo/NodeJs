@@ -20,8 +20,7 @@ export default function Login() {
         .then((data) => {
             alert(data.msg);
             if (data.msg === "Login realizado com sucesso!") {
-                console.log(data.id)
-
+                
                 // Isto não é seguro
                 navigate(`/RelacionarAlunoDisciplina/${data.id}`)
             }

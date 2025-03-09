@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const AlunoDisciplinaSchema = new Schema({
+const MatriculaSchema = new Schema({
     alunoId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -14,5 +14,5 @@ const AlunoDisciplinaSchema = new Schema({
     }
 })
 
-const AlunoDisciplina = mongoose.model('AlunoDisciplina', AlunoDisciplinaSchema)
-module.exports = AlunoDisciplina
+const Matricula = mongoose.model('Matricula', MatriculaSchema)
+module.exports = Matricula

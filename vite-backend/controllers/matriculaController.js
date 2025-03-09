@@ -1,8 +1,8 @@
 const Aluno = require("../models/Aluno");
 const Disciplina = require("../models/Disciplina");
-const AlunoDisciplina = require("../models/AlunoDisciplina");
+const AlunoDisciplina = require("../models/Matricula");
 
-const AlunoDisciplinaController = {
+const matriculaController = {
   create: async (req, res) => {
     try {      
       const { alunoId, disciplinaId } = req.body;
@@ -24,7 +24,7 @@ const AlunoDisciplinaController = {
         disciplinaId
       });
 
-      res.status(201).json({ alunoDisciplina, msg: "Aluno vinculado à disciplina com sucesso!" });
+      res.status(201).json({ alunoDisciplina, msg: "Aluno matriculado à disciplina com sucesso!" });
   
     } catch (error) {
       console.log("Erro:", error);
@@ -34,6 +34,13 @@ const AlunoDisciplinaController = {
 
   readAll: async (req, res) => {
     const results = await AlunoDisciplina.find({});
+    res.status(200).json(results);
+  },
+
+  readAllByAlunoId: async (req, res) => {
+    const alunoId = req.body.alunoId;
+    console.log(alunoId)
+    const results = await AlunoDisciplina.findOne({ alunoId })
     res.status(200).json(results);
   },
 
@@ -72,4 +79,4 @@ const AlunoDisciplinaController = {
   }    
 };
 
-module.exports = AlunoDisciplinaController;
+module.exports = matriculaController;
