@@ -22,7 +22,7 @@ export default function Login() {
             if (data.msg === "Login realizado com sucesso!") {
 
                 // Isto não é seguro
-                navigate(`/MatricularAluno/${data.id}`)
+                navigate(`/Aluno/${data.id}`)
             }
         })
         .catch((err) => {

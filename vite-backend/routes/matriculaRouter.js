@@ -3,8 +3,6 @@ const matriculaController = require("../controllers/matriculaController")
 
 router.route("/Matriculas").post((req, res) => matriculaController.create(req, res))
 
-//router.route("/Matriculas/:id").post((req, res) => matriculaController.return(req, res))
-
 router.route("/Matriculas/all").get((req, res) => matriculaController.readAll(req, res))
 router.route("/Matriculas/all/:id").post((req, res) => matriculaController.readAllByAlunoId(req, res))
 

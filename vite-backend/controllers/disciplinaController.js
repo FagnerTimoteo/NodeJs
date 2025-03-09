@@ -15,30 +15,43 @@ const disciplinaController = {
         }
     },
 
-    readAll: async (req, res) => {
-        let results = await Disciplina.find({})
-        res.send(results).status(200)
+    find: async (req, res) => {
+        const id = req.params.id;
+
+        const results = await Disciplina.findOne({id});
+        res.status(200).json(results);
     },
+
+    readAll: async (req, res) => {
+        try {
+            let results = await Disciplina.find({});
+            console.log("Resultados encontrados:", results); // 👀 Depuração no console
+            res.status(200).json(results);
+        } catch (error) {
+            console.error("Erro ao buscar disciplinas:", error);
+            res.status(500).send({ error: "Erro ao buscar disciplinas" });
+        }
+    },    
 
     update: async (req, res) => {
         try {
-            const id = req.params.id
-
-            const nome = req.body.nome
-            const cargaHoraria = req.body.cargaHoraria
-
+            const id = req.params.id;
+    
+            const { nome, cargaHoraria } = req.body;
+    
             const disciplina = await Disciplina.findByIdAndUpdate(
                 id,
-                { nome: nome },
-                { cargaHoraria: cargaHoraria },
+                { nome, cargaHoraria },
                 { new: true }
             );
-            
-            res.send(disciplina).status(200)
+    
+            res.status(200).send(disciplina);
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            res.status(500).send({ error: "Erro ao atualizar disciplina" });
         }
     },
+    
 
     delete: async (req, res) => {
         try {

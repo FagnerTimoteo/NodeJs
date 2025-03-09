@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-export default function CadastrarDisciplina() {
+export default function UpdateDisciplina() {
+    const { id } = useParams();
     const [nome, setNome] = useState('');
     const [cargaHoraria, setCargaHoraria] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        await fetch('http://127.0.0.1:3000/api/Disciplinas', {
+        await fetch(`http://127.0.0.1:3000/api/Disciplinas/update/${id}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -20,7 +22,7 @@ export default function CadastrarDisciplina() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            alert('Disciplina cadastrada com sucesso!');
+            alert('Disciplina editada com sucesso!');
             setNome('');
             setCargaHoraria('');
         })
@@ -32,7 +34,7 @@ export default function CadastrarDisciplina() {
     return (<>
         <div className="container mt-4">
             <form onSubmit={handleSubmit} className="p-4 border rounded shadow bg-light">
-                <h3 className="mb-3 text-center">Cadastrar Disciplina</h3>
+                <h3 className="mb-3 text-center">Editar Disciplina</h3>
 
                 <div className="mb-3">
                 <label className="form-label">Nome</label>
@@ -47,7 +49,7 @@ export default function CadastrarDisciplina() {
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100">
-                Cadastrar
+                Editar
                 </button>
             </form>
         </div>

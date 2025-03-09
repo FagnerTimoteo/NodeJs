@@ -5,14 +5,13 @@ export default function ListarDisciplinas() {
 
     const [disciplinas, setDisciplinas] = useState([]);
 
-    //Recebe o evento do formulário
     const handleDelete = async (id) => {
         if(window.confirm("Deseja excluir?"))
             fetch(`http://127.0.0.1:3000/api/Disciplinas/delete/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-            },
+                },
             })
             .then((response) => response.json())
             .catch((err) => {
@@ -34,7 +33,7 @@ export default function ListarDisciplinas() {
                 <thead className="table-dark">
                 <tr>
                     <th colSpan="4" className="text-center">
-                    <Link to="/Inserir" state={{ id: null }} className="btn btn-success">
+                    <Link to="/Disciplinas/Cadastrar" state={{ id: null }} className="btn btn-success">
                         Cadastrar nova disciplina
                     </Link>
                     </th>
@@ -52,13 +51,13 @@ export default function ListarDisciplinas() {
                     <td>{disciplina.nome}</td>
                     <td>{disciplina.cargaHoraria}</td>
                     <td>
-                        <Link to="/Update" state={{ id: disciplina._id }} className="btn btn-warning">
+                        <Link to={`/Disciplinas/Update/${disciplina._id}`} state={{ id: disciplina._id }} className="btn btn-warning">
                             Editar
                         </Link>
                     </td>
                     <td>
-                        <button onClick={ handleDelete(disciplina._id) } className="btn btn-danger">
-                            🗑 Excluir
+                        <button onClick={() => handleDelete(disciplina._id)} className="btn btn-danger">
+                            Excluir
                         </button>
                     </td>
                     </tr>

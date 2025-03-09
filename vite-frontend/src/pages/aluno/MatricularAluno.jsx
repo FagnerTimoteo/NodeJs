@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function MatricularAluno() {
-    const { id } = useParams(); // Pega o ID da URL
+    const { id } = useParams();
     const [disciplinas, setDisciplinas] = useState([]); 
     const [disciplinaSelecionada, setDisciplinaSelecionada] = useState("");
     
@@ -22,11 +22,6 @@ export default function MatricularAluno() {
         .then((response) => response.json())
         .then((data) => {
             alert(data.msg);
-            if (data.msg === "Aluno matriculado à disciplina com sucesso!") {
-
-                // Isto não é seguro
-                navigate(`/RelacionarAlunoDisciplina/${data.id}`)
-            }
         })
         .catch((err) => console.log(err.message) );
     };

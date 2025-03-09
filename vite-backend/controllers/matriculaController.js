@@ -38,7 +38,7 @@ const matriculaController = {
   readAllByAlunoId: async (req, res) => {
     const alunoId = req.params.id;
 
-    const results = await AlunoDisciplina.findOne({ alunoId })
+    const results = await AlunoDisciplina.find({ alunoId })
     res.status(200).json(results);
   },
 
@@ -74,7 +74,7 @@ const matriculaController = {
         console.log(error);
         res.status(500).json({ message: "Erro ao deletar relação de Aluno e Disciplina" });
     }
-  }    
+  }  
 };
 
 module.exports = matriculaController;
