@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Inicio from "./pages/Inicio";
+
 import Login from "./pages/aluno/Login";
 import CadastrarAluno from "./pages/aluno/CadastrarAluno";
+
+import MenuAluno from "./pages/aluno/MenuAluno";
+
 import CadastrarDisciplina from "./pages/disciplina/CadastrarDisciplina";
 
 import ListarMatriculasAlunos from "./pages/aluno/ListarMatriculas"
@@ -16,7 +21,10 @@ export default function RoutesApp(){
     return(
     <BrowserRouter>
       <Routes>
+        <Route path="/Inicio" element={<Inicio />} />
+
         <Route path="/Aluno/Login" element={<Login />} />
+        <Route path="/Aluno/:id" element={<MenuAluno />} />
         <Route path="/Aluno/Cadastrar" element={<CadastrarAluno />} />
         <Route path="/Aluno/Matricular/:id" exact element={<MatricularAluno />} />
 

@@ -21,7 +21,7 @@ export default function Login() {
             alert(data.msg);
             if (data.msg === "Login realizado com sucesso!") {
 
-                // Isto não é seguro
+                // Isso não é seguro
                 navigate(`/Aluno/${data.id}`)
             }
         })

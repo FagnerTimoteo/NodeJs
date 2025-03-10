@@ -1,3 +1,4 @@
+const { response } = require("express");
 const Aluno = require("../models/Aluno")
 const crypto = require("crypto");
 
@@ -32,11 +33,29 @@ const alunoController = {
             res.status(500).json({ msg: "Algo deu errado!" });
         }
     },
-    
 
-    readAll: async(req, res) => {
-        let results = await Aluno.find({})
-        res.send(results).status(200)
+    find: async (req, res) => {
+        const id = req.params.id;
+                
+        const response = await Aluno.findById(id)
+            .select('-__v')
+            .select('-_id')
+            .select('-senha')
+
+        res.status(200).json(response);
+    },
+    
+    readAll: async (req, res) => {
+        try {
+            let response = await Aluno.find({})
+                .select('-senha')
+                .select('-endereco')
+
+            res.status(200).json(response);
+        } catch (error) {
+            console.error("Erro ao buscar alunos:", error);
+            res.status(500).json({ error: "Erro ao buscar alunos" });
+        }
     },
 
     update: async (req, res) => {
