@@ -47,7 +47,7 @@ const alunoController = {
     
     readAll: async (req, res) => {
         try {
-            let response = await Aluno.find({})
+            let response = await Aluno.find()
                 .select('-senha')
                 .select('-endereco')
 

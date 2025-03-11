@@ -4,11 +4,18 @@ import { useParams } from "react-router-dom";
 export default function MenuAluno() {
     const { id } = useParams(); // Pega o ID do aluno na URL
     const [aluno, setAluno] = useState(null);
-    const [editando, setEditando] = useState({}); // Estado para controlar a edição dos campos
+    
+    const [nome, setNome] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
+    const [matricula, setMatricula] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [email, setEmail] = useState('');
+    const [curso, setCurso] = useState('');
     const [senha, setSenha] = useState('');
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:3000/api/Aluno/${id}`, {
+        fetch(`http://127.0.0.1:3000/api/Aluno/find/${id}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -22,93 +29,110 @@ export default function MenuAluno() {
         .catch((err) => console.log("Erro ao buscar aluno:", err));
     }, [id]);
 
-    const handleSubmit = async () => {
-        const alunoAtualizado = { ...aluno, senha };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         await fetch(`http://127.0.0.1:3000/api/Aluno/update/${id}`, {
-            method: 'POST',  // Alterado para PUT, que é mais adequado para atualização
+            method: 'PUT',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
-            body: JSON.stringify(alunoAtualizado),
+            body: JSON.stringify({
+                nome,
+                endereco,
+                dataNascimento,
+                matricula,
+                telefone,
+                email,
+                curso,
+                senha
+            }),
         })
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            alert('Aluno editado com sucesso!');
-            setEditando({}); // Desativa os campos após salvar
+            alert('Aluno cadastrado com sucesso!');
+            setNome('');
+            setEndereco('');
+            setDataNascimento('');
+            setMatricula('');
+            setTelefone('');
+            setEmail('');
+            setCurso('');
+            setSenha('');
         })
         .catch((err) => {
             console.log(err.message);
         });
     };
 
-    const handleEdit = (chave) => {
-        setEditando((prev) => ({
-            ...prev,
-            [chave]: !prev[chave] // Alterna entre edição e exibição
-        }));
-
-        if (editando[chave]) {
-            handleSubmit(); // Salva ao desativar o campo
-        }
-    };
-
-    const handleChange = (chave, valor) => {
-        setAluno((prev) => ({
-            ...prev,
-            [chave]: valor
-        }));
-    };
-
     if (!aluno) {
         return <div className="container mt-4">Carregando...</div>;
     }
 
-    return (
+    return (<>
         <div className="container mt-4">
             <h2>Detalhes do Aluno</h2>
             <table className="table table-bordered">
                 <tbody>
-                    {Object.entries(aluno).map(([chave, valor]) => (
-                        <tr key={chave}>
-                            <th>{chave}</th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    value={aluno[chave]} 
-                                    className="form-control"
-                                    disabled={!editando[chave]}
-                                    onChange={(e) => handleChange(chave, e.target.value)}
-                                />
-                            </td>
-                            <td>
-                                <button onClick={() => handleEdit(chave)} className="btn btn-warning">
-                                    {editando[chave] ? "Salvar" : "Editar"}
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    <tr>
+                        <th>Nome</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.nome}
+                            onChange={(e) => setNome(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Endereço</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.endereco}
+                            onChange={(e) => setEndereco(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Data de Nascimento</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.dataNascimento}
+                            onChange={(e) => setDataNascimento(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Matricula</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.matricula}
+                            onChange={(e) => setMatricula(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Telefone</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.telefone}
+                            onChange={(e) => setTelefone(e.target.value)}
+                            onInput={(e) => {
+                                let value = e.target.value.replace(/\D/g, ''); // Remove letras e sinais
+                                value = value.replace(/^(\d{2})(\d)/g, '($1) $2'); // DDD
+                                value = value.replace(/(\d{5})(\d)/, '$1-$2'); // Hífen depois dos 5 números
+                                e.target.value = value; 
+                                setTelefone(value); 
+                            }}/></td>
+
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.email}
+                            onChange={(e) => setEmail(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
+                    <tr>
+                        <th>Curso</th>
+                        <td><input className="form-control" disabled type="text" value={aluno.curso}
+                            onChange={(e) => setCurso(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
+                    </tr>
                     <tr>
                         <th>Senha</th>
-                        <td>
-                            <input 
-                                type="text" 
-                                placeholder="senha" 
-                                value={senha} 
-                                className="form-control" 
-                                disabled={!editando["senha"]}
-                                onChange={(e) => setSenha(e.target.value)}
-                            />
-                        </td>
-                        <td>
-                            <button onClick={() => handleEdit("senha")} className="btn btn-warning">
-                                {editando["senha"] ? "Salvar" : "Editar"}
-                            </button>
-                        </td> 
+                        <td><input className="form-control" disabled type="text" placeholder="senha"
+                            onChange={(e) => setSenha(e.target.value)}/></td>
+                        <td><button className="btn btn-warning">Editar</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    );
+    </>);
 }
