@@ -60,33 +60,28 @@ const alunoController = {
 
     update: async (req, res) => {
         try {
-            const id = req.params.id
-
-            const nome = req.body.nome
-            const endereco = req.body.endereco
-            const dataNascimento = req.body.dataNascimento
-            const matricula = req.body.matricula
-            const telefone = req.body.telefone
-            const email = req.body.email
-            const curso = req.body.curso
-
-            const aluno = await Aluno.findByIdAndUpdate(
-                id,
-                { nome: nome },
-                { endereco: endereco },
-                { dataNascimento: dataNascimento },
-                { matricula: matricula },
-                { telefone: telefone},
-                { email: email },
-                { curso: curso },
-                { new: true }
-            );
-            
-            res.send(aluno).status(200)
+            const { id } = req.params;
+            let { nome, endereco, dataNascimento, matricula, telefone, email, curso, senha } = req.body;
+    
+            // Criar objeto de atualização sem incluir senha vazia
+            const updateData = { nome, endereco, dataNascimento, matricula, telefone, email, curso };
+    
+            if (senha) { // Apenas atualizar se senha for preenchida
+                updateData.senha = hash(senha); 
+            }
+    
+            const aluno = await Aluno.findByIdAndUpdate(id, updateData, { new: true });
+    
+            if (!aluno) {
+                return res.status(404).send({ error: "Aluno não encontrado" });
+            }
+    
+            res.status(200).send(aluno);
         } catch (err) {
-            console.log(err)
+            console.error("Erro ao atualizar aluno:", err);
+            res.status(500).send({ error: "Erro interno do servidor" });
         }
-    },
+    },        
 
     delete: async (req, res) => {
         try {

@@ -5,7 +5,7 @@ router.route("/Matriculas").post((req, res) => matriculaController.create(req, r
 
 router.route("/Matriculas/all").get((req, res) => matriculaController.readAll(req, res))
 
-router.route("/Matriculas/all/:id").post((req, res) => matriculaController.readAllByAlunoId(req, res))
+router.route("/Matriculas/all/:id").get((req, res) => matriculaController.readAllByAlunoId(req, res))
 
 router.route("/Matriculas/update/:id").post((req, res) => matriculaController.update(req, res))
 
