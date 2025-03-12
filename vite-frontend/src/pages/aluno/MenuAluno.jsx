@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function MenuAluno() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [aluno, setAluno] = useState(null);
-    
+
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
@@ -51,8 +52,6 @@ export default function MenuAluno() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(nome, endereco, dataNascimento, matricula, telefone, email, curso, senha)
-
         await fetch(`http://127.0.0.1:3000/api/Aluno/update/${id}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -72,6 +71,23 @@ export default function MenuAluno() {
             }
         })
         .catch((err) => console.log(err.message));
+    };
+
+    const handleDelete = async () => {
+        if (window.confirm("Tem certeza que deseja excluir sua conta? Essa ação não pode ser desfeita!")) {
+            await fetch(`http://127.0.0.1:3000/api/Aluno/delete/${id}`, {
+                method: "DELETE",
+            })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Conta excluída com sucesso.");
+                    navigate("/");
+                } else {
+                    alert("Erro ao excluir a conta.");
+                }
+            })
+            .catch((err) => console.error("Erro ao excluir aluno:", err));
+        }
     };
 
     return (
@@ -120,6 +136,7 @@ export default function MenuAluno() {
             ) : (
                 <p>Carregando aluno...</p>
             )}
+            <button onClick={handleDelete} className="btn btn-danger mt-3">Apagar conta</button>
         </div>
     );
 }

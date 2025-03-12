@@ -25,7 +25,7 @@ const disciplinaController = {
     readAll: async (req, res) => {
         try {
             let results = await Disciplina.find({});
-            console.log("Resultados encontrados:", results); // 👀 Depuração no console
+            console.log("Resultados encontrados:", results);
             res.status(200).json(results);
         } catch (error) {
             console.error("Erro ao buscar disciplinas:", error);
@@ -56,11 +56,11 @@ const disciplinaController = {
     delete: async (req, res) => {
         try {
             const id = req.params.id
-            await Disciplina.deleteOne({ _id: id }) // Espera apagar
-            res.status(200).json({ message: 'Disciplina deletada com sucesso!' }) // Envia resposta
+            await Disciplina.deleteOne({ _id: id })
+            res.status(200).json({ message: 'Disciplina deletada com sucesso!' })
         } catch (error) {
             console.log(error)
-            res.status(500).json({ message: 'Erro ao deletar disciplina' }) // Responde erro
+            res.status(500).json({ message: 'Erro ao deletar disciplina' })
         }
     }
 }

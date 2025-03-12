@@ -63,10 +63,9 @@ const alunoController = {
             const { id } = req.params;
             let { nome, endereco, dataNascimento, matricula, telefone, email, curso, senha } = req.body;
     
-            // Criar objeto de atualização sem incluir senha vazia
             const updateData = { nome, endereco, dataNascimento, matricula, telefone, email, curso };
     
-            if (senha) { // Apenas atualizar se senha for preenchida
+            if (senha) { // Apenas atualiza se a senha não estiver em branco
                 updateData.senha = hash(senha); 
             }
     

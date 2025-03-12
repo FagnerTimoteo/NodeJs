@@ -45,7 +45,7 @@ const matriculaController = {
   update: async (req, res) => {
     try {
       const id = req.params.id;
-      const { disciplinaId } = req.body; // Removemos nota e semestre
+      const { disciplinaId } = req.body;
   
       const existe = await AlunoDisciplina.findById(id);
       if (!existe) {
@@ -55,7 +55,7 @@ const matriculaController = {
       const alunoDisciplina = await AlunoDisciplina.findByIdAndUpdate(
         id,
         { disciplinaId },
-        { new: true } // Para retornar o objeto atualizado
+        { new: true }
       );
   
       res.status(200).json({ alunoDisciplina, msg: "AlunoDisciplina atualizado com sucesso!" });

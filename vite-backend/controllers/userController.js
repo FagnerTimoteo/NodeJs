@@ -46,7 +46,7 @@ const userController = {
     update: async(req, res) => {
         try {
             const id = req.params.id
-            const { name } = req.body; // Pega o nome do corpo da requisição
+            const { name } = req.body;
 
             const user = await User.findByIdAndUpdate(id, { name: name }, { new: true });
 

@@ -5,12 +5,12 @@ const MatriculaSchema = new Schema({
     alunoId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Aluno' // Se quiser popular depois
+        ref: 'Aluno'
     },
     disciplinaId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Disciplina' // Se quiser popular depois
+        ref: 'Disciplina'
     }
 })
 

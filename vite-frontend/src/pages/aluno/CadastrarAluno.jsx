@@ -11,7 +11,7 @@ export default function CasdastrarAluno() {
     const [senha, setSenha] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Isso aqui evita que a página recarregue
+        e.preventDefault();
 
         await fetch('http://127.0.0.1:3000/api/Aluno', {
             method: 'POST',
