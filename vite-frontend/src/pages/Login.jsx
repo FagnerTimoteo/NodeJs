@@ -9,7 +9,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch('http://127.0.0.1:3000/api/Aluno/login', {
+        await fetch('http://127.0.0.1:3000/api/Usuario/login', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -22,7 +22,7 @@ export default function Login() {
             if (data.msg === "Login realizado com sucesso!") {
 
                 // Isso não é seguro
-                navigate(`/Aluno/${data.id}`)
+                navigate(`/Usuario/${data.id}`)
             }
         })
         .catch((err) => {
@@ -65,6 +65,7 @@ export default function Login() {
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100">Logar</button>
+                <a href="/Cadastrar">Não estou cadastrado</a>
             </form>
         </div>
     </>)

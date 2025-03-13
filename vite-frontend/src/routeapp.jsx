@@ -1,43 +1,42 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Inicio from "./pages/Inicio";
+import Login from "./pages/Login";
+import CadastrarUsuario from "./pages/CadastrarUsuario";
 
-import Login from "./pages/aluno/Login";
+
 import CadastrarAluno from "./pages/aluno/CadastrarAluno";
+import ListarAluno from "./pages/aluno/ListarAluno";
 
-import MenuAluno from "./pages/aluno/MenuAluno";
+import AtualizarAluno from "./pages/aluno/CadastrarAluno";
+
 
 import CadastrarDisciplina from "./pages/disciplina/CadastrarDisciplina";
+import ListarDisciplinas from "./pages/disciplina/ListarDisciplinas";
+import AtualizarDisciplina from "./pages/disciplina/UpdateDisciplina";
 
-import ListarMatriculasAlunos from "./pages/aluno/ListarMatriculas"
-
-import UpdateMatriculasAlunos from "./pages/aluno/ListarMatriculas"
 
 import MatricularAluno from "./pages/aluno/MatricularAluno";
-import ListarDisciplinas from "./pages/disciplina/ListarDisciplinas";
-import UpdateDisciplina from "./pages/disciplina/UpdateDisciplina";
+import ListarMatriculasAlunos from "./pages/aluno/ListarMatriculas"
 
 export default function RoutesApp(){
     return(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/Inicio" element={<Inicio />} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Cadastrar/Usuario" element={<CadastrarUsuario />} />
 
-        <Route path="/Aluno/Login" element={<Login />} />
-        <Route path="/Aluno/:id" element={<MenuAluno />} />
-        <Route path="/Aluno/Cadastrar" element={<CadastrarAluno />} />
-        <Route path="/Aluno/Matricular/:id" exact element={<MatricularAluno />} />
+          <Route path="/Cadastrar/Aluno" element={<CadastrarAluno />} />
+          <Route path="/Aluno/Listar" element={<ListarAluno />} />
 
-        <Route path="/Aluno/Matriculas/Listar/:id" exact element={<ListarMatriculasAlunos />} />
+          <Route path="/Aluno/Atualizar/:id" element={<AtualizarAluno />} />
 
-        <Route path="/Aluno/Matriculas/Update/:id" exact element={<UpdateMatriculasAlunos />} />
+          <Route path="/Disciplinas/Cadastrar" exact element={<CadastrarDisciplina />} />
+          <Route path="/Disciplinas/Listar" exact element={<ListarDisciplinas />} />
+          <Route path="/Disciplinas/Atualizar/:id" exact element={<AtualizarDisciplina />} />
 
-        <Route path="/Disciplinas/Listar" exact element={<ListarDisciplinas />} />
-        <Route path="/Disciplinas/Update/:id" exact element={<UpdateDisciplina />} />
-        <Route path="/Disciplinas/Cadastrar" exact element={<CadastrarDisciplina />} />
-
-        
-      </Routes>
-    </BrowserRouter>
+          <Route path="/Aluno/Matricular/:id" exact element={<MatricularAluno />} />
+          <Route path="/Aluno/Matricula/Listar/:id" exact element={<ListarMatriculasAlunos />} />
+        </Routes>
+      </BrowserRouter>
     );
 }

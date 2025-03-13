@@ -11,6 +11,4 @@ const alunoController = require("../controllers/alunoController");
 
     router.route("/Aluno/delete/:id").delete((req, res) => alunoController.delete(req, res))
 
-    router.route("/Aluno/login").post((req, res) => alunoController.login(req, res))
-
 module.exports = router

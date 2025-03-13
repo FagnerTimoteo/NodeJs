@@ -51,7 +51,7 @@ export default function ListarDisciplinas() {
                     <td>{disciplina.nome}</td>
                     <td>{disciplina.cargaHoraria}</td>
                     <td>
-                        <Link to={`/Disciplinas/Update/${disciplina._id}`} state={{ id: disciplina._id }} className="btn btn-warning">
+                        <Link to={`/Disciplinas/Atualizar/${disciplina._id}`} state={{ id: disciplina._id }} className="btn btn-warning">
                             Editar
                         </Link>
                     </td>

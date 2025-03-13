@@ -8,8 +8,6 @@ export default function CasdastrarAluno() {
     const [telefone, setTelefone] = useState('');
     const [email, setEmail] = useState('');
     const [curso, setCurso] = useState('');
-    const [senha, setSenha] = useState('');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -25,8 +23,7 @@ export default function CasdastrarAluno() {
                 matricula,
                 telefone,
                 email,
-                curso,
-                senha
+                curso
             }),
         })
         .then((response) => response.json())
@@ -40,7 +37,6 @@ export default function CasdastrarAluno() {
             setTelefone('');
             setEmail('');
             setCurso('');
-            setSenha('');
         })
         .catch((err) => {
             console.log(err.message);
@@ -97,18 +93,7 @@ export default function CasdastrarAluno() {
                     <div className="mb-3">
                         <input type="text" placeholder="Curso" value={curso} required
                             onChange={(e) => setCurso(e.target.value)} className="form-control"/>
-                    </div>
-                    <div className="mb-3">
-                        <input type="password" placeholder="Senha" value={senha} required
-                            id="password" onChange={(e) => setSenha(e.target.value)} className="form-control"/>
-                    </div>
-                    
-                    <div className="form-check mb-3">
-                        <input type="checkbox" className="form-check-input" id="showPassword"
-                            onClick={(e) => showPassword(e)} />
-                        <label className="form-check-label" htmlFor="showPassword">Mostrar Senha</label>
-                    </div>
-    
+                    </div>   
                     <button type="submit" className="btn btn-primary w-100">Cadastrar</button>
                 </form>
             </div>
