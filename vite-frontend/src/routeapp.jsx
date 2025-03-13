@@ -3,20 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import CadastrarUsuario from "./pages/CadastrarUsuario";
 
-
 import CadastrarAluno from "./pages/aluno/CadastrarAluno";
 import ListarAluno from "./pages/aluno/ListarAluno";
-
-import AtualizarAluno from "./pages/aluno/CadastrarAluno";
-
+import AtualizarAluno from "./pages/aluno/AtualizarAluno";
 
 import CadastrarDisciplina from "./pages/disciplina/CadastrarDisciplina";
 import ListarDisciplinas from "./pages/disciplina/ListarDisciplinas";
 import AtualizarDisciplina from "./pages/disciplina/UpdateDisciplina";
 
 
-import MatricularAluno from "./pages/aluno/MatricularAluno";
-import ListarMatriculasAlunos from "./pages/aluno/ListarMatriculas"
+import MatricularAluno from "./pages/matricula/MatricularAluno";
+import ListarMatriculasAlunos from "./pages/matricula/ListarMatriculas"
 
 export default function RoutesApp(){
     return(

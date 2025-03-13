@@ -30,7 +30,6 @@ const alunoController = {
         const response = await Aluno.findById(id)
             .select('-__v')
             .select('-_id')
-            .select('-senha')
 
         res.status(200).json(response);
     },
@@ -54,10 +53,6 @@ const alunoController = {
             const updateData = { nome, endereco, dataNascimento, matricula, telefone, email, curso };
     
             const aluno = await Aluno.findByIdAndUpdate(id, updateData, { new: true });
-    
-            if (!aluno) {
-                return res.status(404).send({ error: "Aluno não encontrado" });
-            }
     
             res.status(200).send(aluno);
         } catch (err) {

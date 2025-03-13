@@ -1,4 +1,4 @@
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
 export default function ListarDisciplinas() {
@@ -31,19 +31,19 @@ export default function ListarDisciplinas() {
         <div className="container mt-4">
             <table className="table table-bordered table-striped">
                 <thead className="table-dark">
-                <tr>
-                    <th colSpan="4" className="text-center">
-                    <Link to="/Disciplinas/Cadastrar" state={{ id: null }} className="btn btn-success">
-                        Cadastrar nova disciplina
-                    </Link>
-                    </th>
-                </tr>
-                <tr>
-                    <th>Nome</th>
-                    <th>Carga Horária</th>
-                    <th>Editar</th>
-                    <th>Excluir</th>
-                </tr>
+                    <tr>
+                        <th colSpan="4" className="text-center">
+                        <Link to="/Disciplinas/Cadastrar" state={{ id: null }} className="btn btn-success">
+                            Cadastrar nova disciplina
+                        </Link>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Carga Horária</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {disciplinas.map((disciplina) => (
