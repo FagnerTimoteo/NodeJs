@@ -1,6 +1,6 @@
 const Aluno = require("../models/Aluno");
 const Disciplina = require("../models/Disciplina");
-const AlunoDisciplina = require("../models/Matricula");
+const Matricula = require("../models/Matricula");
 
 const matriculaController = {
   create: async (req, res) => {
@@ -17,12 +17,12 @@ const matriculaController = {
         return res.status(404).json({ msg: "Disciplina não encontrada!" });
       }
 
-      const alunoDisciplina = await AlunoDisciplina.create({
+      const matricula = await Matricula.create({
         alunoId,
         disciplinaId
       });
 
-      res.status(201).json({ alunoDisciplina, msg: "Aluno matriculado à disciplina com sucesso!" });
+      res.status(201).json({ matricula: matricula, msg: "Aluno matriculado à disciplina com sucesso!" });
   
     } catch (error) {
       console.log("Erro:", error);
@@ -31,44 +31,21 @@ const matriculaController = {
   },
 
   readAll: async (req, res) => {
-    const results = await AlunoDisciplina.find({});
+    const results = await Matricula.find({});
     res.status(200).json(results);
   },
 
   readAllByAlunoId: async (req, res) => {
     const alunoId = req.params.id;
 
-    const results = await AlunoDisciplina.find({ alunoId })
+    const results = await Matricula.find({ alunoId })
     res.status(200).json(results);
   },
-
-  update: async (req, res) => {
-    try {
-      const id = req.params.id;
-      const { disciplinaId } = req.body;
-  
-      const existe = await AlunoDisciplina.findById(id);
-      if (!existe) {
-        return res.status(404).json({ msg: "Registro não encontrado!" });
-      }
-  
-      const alunoDisciplina = await AlunoDisciplina.findByIdAndUpdate(
-        id,
-        { disciplinaId },
-        { new: true }
-      );
-  
-      res.status(200).json({ alunoDisciplina, msg: "AlunoDisciplina atualizado com sucesso!" });
-    } catch (err) {
-      console.log("Erro:", err);
-      res.status(500).json({ msg: "Algo deu errado!" });
-    }
-  },  
 
   delete: async (req, res) => {
     try {
         const id = req.params.id;
-        await AlunoDisciplina.deleteOne({ _id: id });
+        await Matricula.deleteOne({ _id: id });
         res.status(200).json({ message: "Relação de Aluno e Disciplina deletada com sucesso!" });
     } catch (error) {
         console.log(error);

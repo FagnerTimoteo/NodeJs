@@ -31,6 +31,7 @@ export default function CasdastrarAluno() {
         .then((data) => {
             console.log(data);
             alert('Aluno cadastrado com sucesso!');
+            
             setNome('');
             setEndereco('');
             setDataNascimento('');
@@ -38,6 +39,8 @@ export default function CasdastrarAluno() {
             setTelefone('');
             setEmail('');
             setCurso('');
+
+            navigate(`/Aluno/Listar`)
         })
         .catch((err) => {
             console.log(err.message);

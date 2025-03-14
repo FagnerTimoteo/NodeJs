@@ -19,10 +19,9 @@ export default function Login() {
         .then((response) => response.json())
         .then((data) => {
             alert(data.msg);
-            if (data.msg === "Login realizado com sucesso!") {
-
-                // Isso não é seguro
-                navigate(`/Usuario/${data.id}`)
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                navigate("/home");
             }
         })
         .catch((err) => {
@@ -65,7 +64,7 @@ export default function Login() {
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100">Logar</button>
-                <a href="/Cadastrar">Não estou cadastrado</a>
+                <a href="/Cadastrar/Usuario">Não estou cadastrado</a>
             </form>
         </div>
     </>)

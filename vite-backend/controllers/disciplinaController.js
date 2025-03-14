@@ -25,10 +25,8 @@ const disciplinaController = {
     readAll: async (req, res) => {
         try {
             let results = await Disciplina.find({});
-            console.log("Resultados encontrados:", results);
             res.status(200).json(results);
         } catch (error) {
-            console.error("Erro ao buscar disciplinas:", error);
             res.status(500).send({ error: "Erro ao buscar disciplinas" });
         }
     },    

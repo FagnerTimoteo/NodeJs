@@ -41,7 +41,7 @@ export default function Inicio() {
         <table className="table table-bordered table-striped">
             <thead className="table-dark">
                 <tr>
-                    <th colSpan="9" className="text-center">
+                    <th colSpan="10" className="text-center">
                         <Link to="/Cadastrar/Aluno" state={{ id: null }} className="btn btn-success">
                             Cadastrar novo aluno
                         </Link>
@@ -55,6 +55,7 @@ export default function Inicio() {
                     <td>Data de Nascimento</td>
                     <td>Telefone</td>
                     <td>Email</td>
+                    <td>Disciplinas</td>
                     <td>Editar</td>
                     <td>Excluir</td>
                 </tr>
@@ -69,6 +70,11 @@ export default function Inicio() {
                         <td> { formatarData(aluno.dataNascimento) } </td>
                         <td> {aluno.telefone} </td>
                         <td> {aluno.email} </td>
+                        <td>
+                            <Link to={`/Aluno/Matricula/Listar/${aluno._id}`} state={{ id: aluno._id }} className="btn btn-primary">
+                                Disciplinas
+                            </Link>
+                        </td>
                         <td>
                             <Link to={`/Aluno/Atualizar/${aluno._id}`} state={{ id: aluno._id }} className="btn btn-warning">
                                 Editar

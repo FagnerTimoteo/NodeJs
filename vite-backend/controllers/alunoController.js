@@ -28,8 +28,6 @@ const alunoController = {
         const id = req.params.id;
                 
         const response = await Aluno.findById(id)
-            .select('-__v')
-            .select('-_id')
 
         res.status(200).json(response);
     },

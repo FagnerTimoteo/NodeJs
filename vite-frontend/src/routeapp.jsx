@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Header from "./components/Header";
 
 import Login from "./pages/Login";
 import CadastrarUsuario from "./pages/CadastrarUsuario";
+import Home from "./pages/Home";
 
 import CadastrarAluno from "./pages/aluno/CadastrarAluno";
 import ListarAluno from "./pages/aluno/ListarAluno";
@@ -11,29 +13,43 @@ import CadastrarDisciplina from "./pages/disciplina/CadastrarDisciplina";
 import ListarDisciplinas from "./pages/disciplina/ListarDisciplinas";
 import AtualizarDisciplina from "./pages/disciplina/UpdateDisciplina";
 
-
 import MatricularAluno from "./pages/matricula/MatricularAluno";
-import ListarMatriculasAlunos from "./pages/matricula/ListarMatriculas"
+import ListarMatriculasAlunos from "./pages/matricula/ListarMatriculas";
 
-export default function RoutesApp(){
-    return(
-      <BrowserRouter>
-        <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Cadastrar/Usuario" element={<CadastrarUsuario />} />
+// Função para verificar se o token existe
+const isAuthenticated = () => {
+  const token = localStorage.getItem("token");
+  return token !== null;
+};
 
-          <Route path="/Cadastrar/Aluno" element={<CadastrarAluno />} />
-          <Route path="/Aluno/Listar" element={<ListarAluno />} />
+// Componente para proteger rotas
+const ProtectedRoute = ({ element }) => {
+  return isAuthenticated() ? element : <Navigate to="/Login" />;
+};
 
-          <Route path="/Aluno/Atualizar/:id" element={<AtualizarAluno />} />
+export default function RoutesApp() {
+  return (
+    <BrowserRouter>
+      {/* Exibe o Header somente se o usuário estiver autenticado */}
+      {isAuthenticated() && <Header />}
 
-          <Route path="/Disciplinas/Cadastrar" exact element={<CadastrarDisciplina />} />
-          <Route path="/Disciplinas/Listar" exact element={<ListarDisciplinas />} />
-          <Route path="/Disciplinas/Atualizar/:id" exact element={<AtualizarDisciplina />} />
+      <Routes>
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Cadastrar/Usuario" element={<CadastrarUsuario />} />
+        
+        {/* Rotas protegidas */}
+        <Route path="/Home" element={<ProtectedRoute element={<Home />} />} />
+        <Route path="/Cadastrar/Aluno" element={<ProtectedRoute element={<CadastrarAluno />} />} />
+        <Route path="/Aluno/Listar" element={<ProtectedRoute element={<ListarAluno />} />} />
+        <Route path="/Aluno/Atualizar/:id" element={<ProtectedRoute element={<AtualizarAluno />} />} />
 
-          <Route path="/Aluno/Matricular/:id" exact element={<MatricularAluno />} />
-          <Route path="/Aluno/Matricula/Listar/:id" exact element={<ListarMatriculasAlunos />} />
-        </Routes>
-      </BrowserRouter>
-    );
+        <Route path="/Disciplinas/Cadastrar" element={<ProtectedRoute element={<CadastrarDisciplina />} />} />
+        <Route path="/Disciplinas/Listar" element={<ProtectedRoute element={<ListarDisciplinas />} />} />
+        <Route path="/Disciplinas/Atualizar/:id" element={<ProtectedRoute element={<AtualizarDisciplina />} />} />
+
+        <Route path="/Aluno/Matricular/:id" element={<ProtectedRoute element={<MatricularAluno />} />} />
+        <Route path="/Aluno/Matricula/Listar/:id" element={<ProtectedRoute element={<ListarMatriculasAlunos />} />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

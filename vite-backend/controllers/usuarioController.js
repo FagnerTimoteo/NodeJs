@@ -27,19 +27,23 @@ const usuarioController = {
         }
     },
 
+
     login: async (req, res) => {
         try {
             const { nome, senha } = req.body;
         
             const usuario = await Usuario.findOne({ nome });
             if (!usuario) {
-                return res.status(404).json({ msg: "Usuario não encontrado!" });
+                return res.status(404).json({ msg: "Usuário não encontrado!" });
             }
         
             if (hash(senha) === usuario.senha) {
+                // Gerar um token simples baseado no nome e na senha hash
+                const token = hash(nome + usuario.senha);
+
                 return res.status(200).json({
                     msg: "Login realizado com sucesso!",
-                    id: usuario.id 
+                    token
                 });
             } else {
                 return res.status(401).json({ msg: "Senha inválida!" });
@@ -49,10 +53,11 @@ const usuarioController = {
             res.status(500).json({ msg: "Erro no servidor!" });
         }
     }
-}
+};
 
 function hash(senha) {
     return crypto.createHash("sha256").update(senha).digest("hex");
 }
+
 
 module.exports = usuarioController;
