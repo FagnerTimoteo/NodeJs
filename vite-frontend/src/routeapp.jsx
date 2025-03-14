@@ -16,13 +16,11 @@ import AtualizarDisciplina from "./pages/disciplina/UpdateDisciplina";
 import MatricularAluno from "./pages/matricula/MatricularAluno";
 import ListarMatriculasAlunos from "./pages/matricula/ListarMatriculas";
 
-// Função para verificar se o token existe
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
   return token !== null;
 };
 
-// Componente para proteger rotas
 const ProtectedRoute = ({ element }) => {
   return isAuthenticated() ? element : <Navigate to="/Login" />;
 };

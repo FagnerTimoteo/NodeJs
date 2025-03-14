@@ -1,6 +1,5 @@
-//O mapeamento ORM
 const express = require("express");
-//Acesso via web dos dados
+
 const cors = require("cors");
 const app = express();
 

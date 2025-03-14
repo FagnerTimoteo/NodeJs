@@ -38,7 +38,6 @@ const usuarioController = {
             }
         
             if (hash(senha) === usuario.senha) {
-                // Gerar um token simples baseado no nome e na senha hash
                 const token = hash(nome + usuario.senha);
 
                 return res.status(200).json({

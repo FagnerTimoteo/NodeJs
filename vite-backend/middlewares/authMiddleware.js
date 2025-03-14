@@ -4,12 +4,10 @@ const Usuario = require("../models/Usuario");
 module.exports = async (req, res, next) => {
     const { token } = req.params;
 
-    if (!token) {
+    if (!token)
         return res.status(401).json({ msg: "Acesso negado! Token não fornecido." });
-    }
 
     try {
-        // Procurar um usuário que tenha esse token válido
         const usuarios = await Usuario.find();
         
         for (const usuario of usuarios) {
