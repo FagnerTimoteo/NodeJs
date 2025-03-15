@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import "./Checkbox.css";
+
 export default function CasdastrarUsuario() {
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
@@ -52,8 +54,8 @@ export default function CasdastrarUsuario() {
                             id="password" onChange={(e) => setSenha(e.target.value)} className="form-control"/>
                     </div>
                     
-                    <div className="form-check mb-3">
-                        <input type="checkbox" className="form-check-input" id="showPassword"
+                    <div className="form-check mb-3 d-flex align-items-center">
+                        <input type="checkbox" className="form-check-input" id="showPassword" 
                             onClick={(e) => showPassword(e)} />
                         <label className="form-check-label" htmlFor="showPassword">Mostrar Senha</label>
                     </div>

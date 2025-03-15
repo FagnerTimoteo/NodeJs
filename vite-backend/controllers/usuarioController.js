@@ -42,6 +42,7 @@ const usuarioController = {
 
                 return res.status(200).json({
                     msg: "Login realizado com sucesso!",
+                    nome,
                     token
                 });
             } else {

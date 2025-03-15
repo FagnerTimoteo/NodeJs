@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { AutentificaContexto } from '../AutentificaContexto';
+
+import "./Checkbox.css";
 
 export default function Login() {
     const [nome, setNome] = useState('');
     const [senha, setPassword] = useState('');
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         await fetch('http://127.0.0.1:3000/api/Usuario/login', {
             method: 'POST',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
             body: JSON.stringify({ nome, senha }),
         })
         .then((response) => response.json())
@@ -21,7 +23,8 @@ export default function Login() {
             alert(data.msg);
             if (data.token) {
                 localStorage.setItem("token", data.token);
-                navigate("/home");
+                localStorage.setItem("usuario", data.nome);
+                navigate("/");
             }
         })
         .catch((err) => {
@@ -29,6 +32,7 @@ export default function Login() {
             console.log(err.message);
         });
     };
+    
 
     function showPassword(e) {
         const x = document.getElementById("password");
@@ -39,7 +43,7 @@ export default function Login() {
         }
     }
 
-    return (<>
+    return (
         <div className="container mt-5">
             <form onSubmit={handleSubmit} className="card p-4 shadow">
                 <h1 className="text-center mb-4">Login</h1>
@@ -57,7 +61,7 @@ export default function Login() {
                         id="password"/>
                 </div>
 
-                <div className="form-check mb-3">
+                <div className="form-check mb-3 d-flex align-items-center">
                     <input type="checkbox" className="form-check-input" id="showPassword" 
                         onClick={(e) => showPassword(e)} />
                     <label className="form-check-label" htmlFor="showPassword">Mostrar Senha</label>
@@ -67,5 +71,5 @@ export default function Login() {
                 <a href="/Cadastrar/Usuario">Não estou cadastrado</a>
             </form>
         </div>
-    </>)
+    );
 }

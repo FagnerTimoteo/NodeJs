@@ -4,6 +4,9 @@ import React from 'react';
 export default function Header() {
   const navigate = useNavigate();
 
+  console.log("LocalStorage:", localStorage);
+
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/Login");
@@ -16,7 +19,7 @@ export default function Header() {
 
         <ul className="nav nav-pills">
           <li className="nav-item">
-            <Link to={`/Home`} className="nav-link active">
+            <Link to={`/`} className="nav-link active">
               Início
             </Link>
           </li>

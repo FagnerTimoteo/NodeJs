@@ -1,0 +1,12 @@
+.form-check-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-left: 8px;
+    color: #333;
+}
+
+.form-check-input {
+    transform: scale(1.3);
+    cursor: pointer;
+    border: solid #9e9e9e;
+}

@@ -5,12 +5,10 @@ const MatriculaSchema = new Schema({
     alunoId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Aluno'
     },
     disciplinaId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Disciplina'
     }
 })
 

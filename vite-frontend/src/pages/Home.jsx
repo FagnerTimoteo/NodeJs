@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import "./Home.css"; 
 
-export default function Home() {
+export default function Home() { 
+  const usuario = localStorage.getItem("usuario") || "Visitante";
 
-    return (<>
-
-
-    </>)
+  return (<>
+    <div className="home-container">
+      <h1>Bem-vindo {usuario}!</h1>
+    </div>
+  </>);
 }

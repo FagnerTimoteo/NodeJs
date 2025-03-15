@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import "./Date.css";
+
 export default function CasdastrarAluno() {
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
