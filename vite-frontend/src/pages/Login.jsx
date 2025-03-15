@@ -1,38 +1,40 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { AutentificaContexto } from '../AutentificaContexto';
+import React, { useState } from 'react';
 
 import "./Checkbox.css";
 
 export default function Login() {
     const [nome, setNome] = useState('');
     const [senha, setPassword] = useState('');
-    const navigate = useNavigate();
     
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        await fetch('http://127.0.0.1:3000/api/Usuario/login', {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json; charset=UTF-8' },
-            body: JSON.stringify({ nome, senha }),
-        })
-        .then((response) => response.json())
-        .then((data) => {
+        try {
+            const response = await fetch('http://127.0.0.1:3000/api/Usuario/login', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json; charset=UTF-8' },
+                body: JSON.stringify({ nome, senha }),
+            });
+    
+            if (!response.ok) {
+                throw new Error("Erro ao realizar login!");
+            }
+    
+            const data = await response.json();
             alert(data.msg);
+            
             if (data.token) {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("usuario", data.nome);
-                navigate("/");
+                
+                window.location.href = "/";
             }
-        })
-        .catch((err) => {
-            alert("Erro ao realizar login!");
-            console.log(err.message);
-        });
+            
+        } catch (error) {
+            alert(error.message);
+            console.log(error);
+        }
     };
-    
 
     function showPassword(e) {
         const x = document.getElementById("password");

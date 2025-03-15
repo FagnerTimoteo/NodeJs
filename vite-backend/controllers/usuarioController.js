@@ -12,7 +12,7 @@ const usuarioController = {
             };
 
             const usuarioExiste = await Usuario.findOne({ nome });
-            if (usuarioExiste) {z
+            if (usuarioExiste) {
                 return res.status(404).json({ msg: "Já existe um usuario com esse nome" });
             }
     

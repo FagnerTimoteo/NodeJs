@@ -1,15 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from 'react';
 
 export default function Header() {
-  const navigate = useNavigate();
 
   console.log("LocalStorage:", localStorage);
 
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/Login");
+
+    window.location.href = "/Login";
   };
 
   return (
