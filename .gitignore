@@ -1,0 +1,21 @@
+# Geral
+*.log
+*.cache
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+node_modules/
+dist/
+.env
+
+# Android
+.idea/
+*.iml
+.gradle/
+build/
+local.properties
+
+# Outros
+.vscode/
