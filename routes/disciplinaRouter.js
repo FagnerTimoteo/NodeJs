@@ -7,8 +7,8 @@ router.route("/Disciplinas/all").get((req, res) => disciplinaController.readAll(
 
 router.route("/Disciplinas/:id").get((req, res) => disciplinaController.find(req, res))
 
-router.route("/Disciplinas/update/:id").post((req, res) => disciplinaController.update(req, res))
+router.route("/Disciplinas/update/:id").put((req, res) => disciplinaController.update(req, res))
 
-router.route("/Disciplinas/delete/:id").post((req, res) => disciplinaController.delete(req, res))
+router.route("/Disciplinas/delete/:id").delete((req, res) => disciplinaController.delete(req, res))
 
 module.exports = router
